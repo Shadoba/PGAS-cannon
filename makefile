@@ -2,6 +2,10 @@ SHELL := /bin/bash
 TARGET = cannon
 ARGS = mat1.txt mat2.txt
 
+ifndef n
+	override n = 16
+endif
+
 default: pre-build cannon
 
 pre-build: 
@@ -15,7 +19,7 @@ cannon: $(TARGET).c
 	
 run:
 	/opt/nfs/config/station_name_list.sh 201 216 > nodes
-	UPC_NODEFILE=nodes upcrun -c 4 -N 4 -n 16 ./$(TARGET) $(ARGS) > wynik.txt
+	UPC_NODEFILE=nodes upcrun -c 4 -N 4 -n $(n) ./$(TARGET) $(ARGS) > wynik.txt
 
 clean:
 	-rm -f cannon

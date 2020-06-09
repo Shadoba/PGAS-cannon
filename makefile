@@ -6,14 +6,11 @@ ifndef n
 	override n = 16
 endif
 
-default: pre-build cannon
-
-pre-build: 
-	@echo set context
-	source /opt/nfs/config/source_bupc.sh
+default: cannon
 
 cannon: $(TARGET).c
 	@echo start building
+	source /opt/nfs/config/source_bupc.sh
 	upcc -gupc -network=udp -pthreads=4 ./$(TARGET).c -o $(TARGET)
 	@echo done
 	
